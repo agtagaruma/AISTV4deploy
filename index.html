@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube Playlist Loop with Auto-Refresh</title>
-    <meta http-equiv="refresh" content="180">
 </head>
 <body>
 
@@ -36,6 +35,10 @@
 
         function onPlayerReady(event) {
             event.target.playVideo();
+            // Refresh the page after 90 seconds
+            setInterval(function() {
+                location.reload();
+            }, 90000); // 90 seconds in milliseconds
         }
     </script>
 
