@@ -1,46 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Playlist Loop with Auto-Refresh</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AISTV</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+  }
+</style>
 </head>
 <body>
+<div class="container">
+  <iframe id="playlist" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+</div>
+<script>
+  // Get the playlist iframe element
+  const playlistIframe = document.getElementById('playlist');
 
-    <div id="player"></div>
+  // Function to refresh the playlist every 1 minute and 30 seconds
+  function refreshPlaylist() {
+    playlistIframe.src += '';
+    setTimeout(refreshPlaylist, 90000); // 90000 milliseconds = 1 minute and 30 seconds
+  }
 
-    <script>
-        // Load the YouTube IFrame Player API asynchronously
-        var tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '775',
-                width: '100%',
-                playerVars: {
-                    'listType': 'playlist',
-                    'list': 'PLseb1_pTs5ws0hWIAZQVNZtof43c3nPMO',
-                    'autoplay': 1,
-                    'loop': 1,
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            event.target.playVideo();
-            // Refresh the page after 90 seconds
-            setInterval(function() {
-                location.reload();
-            }, 90000); // 90 seconds in milliseconds
-        }
-    </script>
-
+  // Initial call to start the refresh loop
+  refreshPlaylist();
+</script>
 </body>
 </html>
